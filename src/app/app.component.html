@@ -1,0 +1,49 @@
+<div class="d-flex" id="wrapper">
+  <div class="bg-light border-right font-class" id="sidebar-wrapper">
+    <div class="sidebar-heading">Sweeeeeeet Shooooop</div>
+    <div class="list-group list-group-flush">
+      <a href="categoryTree" class="list-group-item list-group-item-action bg-light" *ngIf="isAdmin()">Category Tree</a>
+      <a href="manageProducts" class="list-group-item list-group-item-action bg-light" *ngIf="isAdmin()">Manage
+        Products</a>
+      <a href="/catalogue" class="list-group-item list-group-item-action bg-light">Catalogue</a>
+      <a href="/userOrders" class="list-group-item list-group-item-action bg-light" *ngIf="isAuthenticated()">My
+        Orders</a>
+      <a href="/home" class="list-group-item list-group-item-action bg-light">Discounts</a>
+      <a href="/home" class="list-group-item list-group-item-action bg-light">Delivery and Payment</a>
+      <a href="/home" class="list-group-item list-group-item-action bg-light">About Us</a>
+    </div>
+  </div>
+  <div id="page-content-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+          <li class="nav-item active">
+            <a href="/basket" class="nav-link">
+              <span id="itemCount" class="font-class">{{getBasketItemsAmount()}}</span>
+              Basket
+            </a>
+          </li>
+          <li class="nav-item active">
+            <a href="/home" class="nav-link">&nbsp;Home</a>
+          </li>
+          <li class="nav-item active" *ngIf="!isAuthenticated()">
+            <a href="/registration" class="nav-link">Registration</a>
+          </li>
+          <li class="nav-item active" *ngIf="!isAuthenticated()">
+            <a href="login" style="text-decoration: none;">
+              <input class="nav-link btn btn-primary btn-sm add-category-btn" type="button" value="Log In"/>
+            </a>
+          </li>
+          <li class="nav-item active" *ngIf="isAuthenticated()">
+            <span id="loggedInUsername" class="nav-link">Current User:&nbsp;{{getCurrentUsername()}}</span>
+          </li>
+          <li class="nav-item active" *ngIf="isAuthenticated()">
+            <input class="nav-link btn btn-primary btn-sm add-category-btn" type="submit" value="Log Out"
+                   (click)="logout()"/>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <router-outlet></router-outlet>
+  </div>
+</div>

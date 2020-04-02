@@ -1,0 +1,45 @@
+<div id="basketForm" *ngIf="products.length > 0">
+  <table id="productsTableHead" class="table font-class product-table fixed_headers category-tree-content">
+    <thead class="product-table-header">
+    <tr class="text-center">
+      <th scope="col" width="25%">Category</th>
+      <th scope="col" width="25%">Name</th>
+      <th scope="col" width="15%">Price</th>
+      <th scope="col" width="15%">Count</th>
+      <th scope="col" width="20%">Action</th>
+    </tr>
+    </thead>
+  </table>
+  <div class="scrollable-content">
+    <table id="basketTable" class="table font-class product-table fixed_headers category-tree-content">
+      <tbody id="basketTblBody">
+      <tr *ngFor="let item of basketItems">
+        <td scope="row" class="text-center" width="25%"><span>{{item.product.category.name}}</span></td>
+        <td scope="row" class="text-center" width="25%"><span>{{item.product.name}}</span></td>
+        <td class="text-center" width="15%"><span>{{item.product.price | number: '.2'}}</span></td>
+        <td scope="row" class="text-center" width="15%"><input type="number" min="1" max="100" [value]="item.amount"
+                                                               (change)="changeProductAmount(item, $event)"/>
+        </td>
+        <td class="text-center" width="20%">
+          <button class="btn btn-primary btn-xs" type="button" (click)="deleteItem(item)">Delete
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-right font-class">
+    <span>Total price:&nbsp;{{totalPrice | number: '.2'}}</span>
+    <span id="totalPrice"></span>
+    <button id="createOrder" class="btn btn-primary btn-xs" type="submit" (click)="saveOrder()">Create Order</button>
+    <button id="closeBasket" class="btn btn-primary btn-xs" type="button">Close</button>
+    <span>&nbsp;</span>
+  </div>
+</div>
+
+<div id="emptyBasket" *ngIf="basketItems.length == 0">
+  <div class="text-center m-auto">
+    <h3 style="color: red;" class="font-class">O_ops! The basket is empty &#9785;</h3>
+    <img src="/assets/img/empty_result.jpg">
+  </div>
+</div>

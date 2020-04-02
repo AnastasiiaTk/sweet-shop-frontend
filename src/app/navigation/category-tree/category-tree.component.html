@@ -1,0 +1,111 @@
+<div class="alert alert-danger font-class" *ngIf="errorMsg">{{errorMsg}}</div>
+<div class="category-tree font-class">
+  <div class="text-right">
+    <button id="addCategoryBtn" class="btn btn-primary btn-lg add-category-btn font-class" type="button"
+            mat-raised-button (click)="showChildModal()">Add
+    </button>
+  </div>
+  <div bsModal #categoryDialog="bs-modal" class="modal fade" tabindex="-1"
+       role="dialog" aria-labelledby="dialog-child-name">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content" *ngIf="categoryToDelete == null">
+        <form (ngSubmit)="saveCategory()" #categoryForm="ngForm">
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-sm">
+                Parent Category:
+              </div>
+              <div class="col-sm">
+                <select class="add-category-field" id="parentCategory"
+                        [(ngModel)]="editableCategory.parentCategory.categoryId" name="rootCategory"
+                        [disabled]="parentEditNotAvailable">
+                  <option [ngValue]="null">-none-</option>
+                  <option *ngFor="let root of rootCategories"
+                          [value]="root.categoryId">{{root.name}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">
+                Category Name:&nbsp;
+              </div>
+              <div class="col-sm">
+                <input name="categoryName" #categoryName="ngModel" class="add-category-field" type="text"
+                       maxlength="256" [(ngModel)]="editableCategory.name" required/>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm">&nbsp;</div>
+              <div class="col-sm">
+                <span id="nameEmptyError" class="error-msg"
+                      *ngIf="editableCategory.name != undefined && categoryName.invalid">Name should not be empty!</span>
+              </div>
+            </div>
+            <div class="text-right add-ctgr-footer">
+              <button id="saveCategory" type="submit" [disabled]="categoryName.invalid"
+                      class="btn btn-primary add-category-btn">Save
+              </button>
+              <button type="button" class="btn btn-primary add-category-btn" mat-raised-button
+                      (click)="hideChildModal()">
+                Close
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-content" *ngIf="categoryToDelete != null">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmLabel">Delete category</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true" (click)="hideChildModal()">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          Are you sure?
+        </div>
+        <div class="modal-footer">
+          <button id="deleteCategoryBtn" type="submit" class="btn btn-primary" (click)="deleteCategory()">Delete
+          </button>
+          <button id="confirmDlgCloseBtn" type="button" class="btn btn-primary" (click)="hideChildModal()">Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="scrollable-content">
+    <ul *ngFor="let category of categories;">
+      <li class="list-group-item list-group-item-info" *ngIf="!category.parentCategory">
+        <input type="hidden" value="{{category.categoryId}}">
+        <span>{{category.name}}</span>
+        <a>
+          <button class="btn btn-primary btn-xs btn-margin" type="button" (click)="openEditCategoryForm(category)">
+            Edit
+          </button>
+        </a>
+        <button class="deleteCategory btn btn-primary btn-xs btn-margin" type="button" data-toggle="modal"
+                data-target="#confirmationModal" (click)="openDeleteCategoryForm(category)">Delete
+        </button>
+        <ul *ngFor="let subcategory of categories;">
+          <li class="list-group-item list-group-item-secondary"
+              *ngIf="subcategory.parentCategory && subcategory.parentCategory.categoryId == category.categoryId">
+            <input type="hidden" value="{{subcategory.parentCategory.categoryId}}">
+            <input type="hidden" value="{{subcategory.categoryId}}">
+            <span>{{subcategory.name}}</span>
+            <a>
+              <button class="btn btn-primary btn-xs btn-margin" type="button"
+                      (click)="openEditCategoryForm(subcategory)">Edit
+              </button>
+            </a>
+            <button class="deleteCategory btn btn-primary btn-xs btn-margin" type="button" data-toggle="modal"
+                    data-target="#categoryDialog" (click)="openDeleteCategoryForm(subcategory)">Delete
+            </button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</div>
+

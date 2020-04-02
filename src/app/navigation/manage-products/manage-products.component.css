@@ -1,0 +1,128 @@
+.add-product-btn {
+  margin-top: 2%;
+  margin-bottom: 1.5%;
+  margin-right: 5%;
+}
+
+.product-table{
+  width: 98%!important;
+  margin-left: 1%;
+  margin-right: 10%;
+  margin-top: 2px;
+}
+
+.product-filter-dropdown{
+  width: 25%;
+}
+
+.product-filter-item{
+  margin-left: 2%;
+}
+
+.product-table-header{
+  background-color: rgba(0,0,0,.125);
+}
+
+.product-img{
+  width: 140px;
+  height: 110px;
+}
+
+#productsTableHead{
+  margin-bottom: 0 !important;
+}
+
+.product-container{
+  margin-left: 5%;
+}
+
+.flex-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+.flex-row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row .thumbnail,
+.flex-row .caption {
+  flex-direction: column;
+  display: flex;
+  flex: 1 0 auto;
+  height: auto;
+  position: relative;
+}
+.flex-text {
+  flex-grow: 1;
+}
+.flex-row img {
+  min-width: 0;
+  width: 75%;
+}
+
+@media only screen and (max-width : 480px){
+  .flex-row > [class*='col-'] {
+    width: 100%;
+  }
+  .flex-row  {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+
+.container{
+  max-width: 98% !important;
+}
+
+.catalogue-img{
+  padding: 10% 10% 10% 10%;
+}
+
+.catalogue-filter{
+  margin-left: 5%;
+  margin-top: 2%;
+}
+
+.portfolio{
+  padding:6%;
+  text-align:center;
+}
+.heading{
+  background: #fff;
+  padding: 1%;
+  text-align: left;
+  box-shadow: 0px 0px 4px 0px #545b62;
+}
+.heading img{
+  width: 10%;
+}
+.bio-info{
+  padding: 2%;
+  background:#fff;
+  box-shadow: 0px 0px 4px 0px #b0b3b7;
+}
+.name{
+  font-family: 'Charmonman', cursive;
+  font-weight:600;
+}
+.bio-image{
+  text-align:center;
+}
+.bio-image img{
+  width: 60%;
+  height: auto;
+  border-radius:50%;
+}
+.bio-content{
+  text-align:left;
+}
+.bio-content p{
+  font-weight:600;
+  font-size:30px;
+}
+
+#totalPrice{
+  margin-right: 2%;
+  margin-top: 1%;
+}

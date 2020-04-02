@@ -1,0 +1,25 @@
+<div class="container">
+  <form id="registrationForm" class="form-signin text-center font-class userLogOrRegForm" (ngSubmit)="saveUser()">
+    <h2 class="form-signin-heading">Account Creation</h2>
+    <div>
+      <div class="alert alert-danger" *ngIf="errorMsg">
+        {{errorMsg}}
+      </div>
+    </div>
+    <label for="inputUsername" class="sr-only">Username</label>
+    <input type="text" id="inputUsername" class="form-control" placeholder="Username"
+           autofocus="true" name="username" [(ngModel)]="user.username"/>
+    <br/>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="password"
+           [(ngModel)]="user.password"/>
+    <br/>
+    <label for="confirmPassword" class="sr-only">Confirmatin Password</label>
+    <input type="password" id="confirmPassword" class="form-control" placeholder="Password" name="confirmPassword"
+           [(ngModel)]="user.confirmPassword"/>
+    <br/>
+    <div class="text-center">
+      <button class="btn btn-primary btn-block" type="submit">Create an Account</button>
+    </div>
+  </form>
+</div>

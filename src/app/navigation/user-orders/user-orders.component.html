@@ -1,0 +1,37 @@
+<h2 class="font-class text-center" *ngIf="orders.length != 0">My Orders</h2>
+<div class="scrollable-content">
+  <div *ngFor="let order of orders">
+    <div class="font-class" style="margin-left: 1%;">
+      <span>Order ID&nbsp;{{order.orderId}}&nbsp;&nbsp;</span>
+      <span>Created date:&nbsp;{{order.date | date: 'dd-MM-yyyy'}}</span>
+    </div>
+    <table id="productsTableHead" class="table font-class product-table fixed_headers category-tree-content">
+      <thead class="product-table-header">
+      <tr class="text-center">
+        <th scope="col" width="15%">Name</th>
+        <th scope="col" width="20%">Photo</th>
+        <th scope="col" width="15%">Price</th>
+        <th scope="col" width="30%">Description</th>
+        <th scope="col" width="10%">Amount</th>
+      </tr>
+      </thead>
+      <tbody id="productsTblBody">
+      <tr *ngFor="let item of order.groupedProducts">
+        <th scope="row" class="text-center" width="15%">{{item.productDTO.product.name}}</th>
+        <td class="text-center" width="20%"><img class="product-img" [src]="productService.getProductImage(item.productDTO)"
+                                                 alt="No photo ¯\_(ツ)_/¯"/></td>
+        <td class="text-center" width="15%">{{item.productDTO.product.price | number: '.2'}}</td>
+        <td class="text-center" width="30%">{{item.productDTO.product.description}}</td>
+        <td class="text-center" width="10%">{{item.amount}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div id="emptyBasket" *ngIf="orders.length == 0">
+  <div class="text-center m-auto">
+    <h3 style="color: red;" class="font-class">O_ops! You have no any orders &#9785;</h3>
+    <img src="/assets/img/empty_result.jpg">
+  </div>
+</div>
